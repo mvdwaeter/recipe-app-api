@@ -9,7 +9,7 @@ services:
     volumes:
       - ./data/postgres:/data
     ports:
-      - "5001:5432"
+      - "${DB_PORT:-5001}:5432"
 
   redis:
     image: redis:5
@@ -17,18 +17,17 @@ services:
     volumes:
       - ./data/redis:/data
     ports:
-      - "5002:6379"
+      - "${REDIS_PORT:-5002}:6379"
 
   app:
     build:
       context: .
     ports:
-      - "8000:8000"
+      - "${WEB_PORT:-8000}:${WEB_PORT:-8000}"
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
-
+      sh -c "python manage.py runserver 0.0.0.0:${WEB_PORT:-8000}"
     depends_on:
       - db
       - redis
