@@ -2,7 +2,11 @@
 Tutorial recipe app
 
 
-# Run in development
+# Initialize development environment in Docker, or re-install pip requirements:
+
+    docker-compose build
+
+# Run the Django app via Docker
 
     docker-compose up
 
